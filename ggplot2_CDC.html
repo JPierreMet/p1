@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>ggplot2_CDC.utf8</title>
+    <meta charset="utf-8" />
+    <script src="ggplot2_CDC_files/header-attrs-2.7/header-attrs.js"></script>
+    <link href="ggplot2_CDC_files/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="ggplot2_CDC_files/panelset-0.2.6/panelset.js"></script>
+    <script src="ggplot2_CDC_files/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="ggplot2_CDC_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="ggplot2_CDC_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script src="ggplot2_CDC_files/mark.js-8.11.1/mark.min.js"></script>
+    <link href="ggplot2_CDC_files/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="ggplot2_CDC_files/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":true,"autoSearch":true}) })</script>
+    <link href="ggplot2_CDC_files/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link rel="stylesheet" href="default2.css" type="text/css" />
+    <link rel="stylesheet" href="rladie.css" type="text/css" />
+    <link rel="stylesheet" href="rladies-font.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+
+
+
+
+background-image: url(imagenes/INICIAL.png)
+background-size:100%
+---
+class: inverse, center, middle
+background-image: url(imagenes/fondo_good.png)
+background-size: cover
+# Visualización de datos con
+&lt;img src="https://ggplot2.tidyverse.org/logo.png" width="150px"/&gt;
+### JPierre Velásquez
+.large[CDC | 25-08-2021]
+
+&lt;style type="text/css"&gt;
+.pull-left {
+  float: left;
+  width: 47%;
+}
+.pull-right {
+  float: right;
+  width: 47%;
+}
+.pull-right ~ p {
+  clear: both;
+}
+&lt;/style&gt;
+
+---
+
+class: center, middle, animated fadeOutLeft
+layout: false
+
+
+# Objetivos
+
+&lt;/br&gt;
+
+### Reforzar conceptos claves para entender el funcionamiento de ggplot2
+
+--
+
+layout: false
+
+### Aprender a realizar gráficas simples sin mayores esfuerzos
+
+--
+
+layout: false
+
+### Mostrar como elaborar gráficas con varios detalles
+
+---
+class: inverse,  center, middle
+
+&lt;img src="https://memegenerator.net/img/instances/50468368/su-nivel-de-concentracin-es-impresionante-.jpg" width="50%" /&gt;
+
+---
+layout: false
+
+background-image: url(https://ggplot2.tidyverse.org/logo.png)
+background-position: 90% 3%
+background-size: 7%
+
+# Introducción a ggpplot2
+
+.panelset[
+.panel[.panel-name[Repaso]
+
+`¿Recuerdan el concepto de estos elementos?`
+
+- **Función:** Una función es un conjunto de sentencias organizadas para realizar una tarea específica.
+
+
+```r
+# Función mean()
+mean(c(1,2,3,4,5))
+# Función sample()
+sample(x = 1:10, size = 2)
+```
+
+- **Librería o paquete:** Son colecciones de funciones de un tema específico.
+
+
+```r
+# Instalar
+install.packages('lubridate')
+# Cargar libreria
+library(lubridate)
+```
+
+- **Data frame:**  Es una estructura compuesta de 2 dimensiones (filas y columnas) en donde cada columna puede tener diferentes tipos de datos.
+
+    - Es la estructura de datos que se utiliza con más frecuencia para el análisis de datos.
+
+]
+
+
+.panel[.panel-name[¿Qué es ggplot2?]
+
+#### Es un paquete dedicado a la visualización de datos de manera gráfica
+
+
+&lt;img src="https://alastairrushworth.github.io/exploring_eda/ggplot2_exploratory.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[¿Por qué usar ggplot2?]
+
+
+.pull-left[
+
+- Permite mejorar en gran medida la calidad y la estética de sus gráficos (como la resolución de salida).
+    
+- Permite realizar gráficos complejos de forma simple.
+
+- Permite construir múltiples gráficos en uno solo de manera simple.
+
+- Permite construir casi cualquier tipo de gráfico.
+
+- `Puedes hacer gifts (animaciones) :D`
+
+&lt;img src="https://www.cursosgis.com/wp-content/uploads/4.gif" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.pull-right[
+
+
+&lt;img src="imagenes/meme1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+]
+
+]
+
+---
+class: inverse, center, middle
+
+### `Realizaremos visualizaciones gráficas de los datos libres de COVID-19`
+
+&lt;img src="https://www.revistalugardeencuentro.com/wp/wp-content/uploads/2020/08/Vector-de-Salud-creado-por-freepik-www.freepik.es_.jpg" width="45%" /&gt;
+
+---
+
+layout: false
+
+background-image: url(https://ggplot2.tidyverse.org/logo.png)
+background-position: 90% 3%
+background-size: 7%
+
+# Visualización de datos con ggplot2
+
+.panelset[
+.panel[.panel-name[P1: Elementos básicos]
+
+.pull-left[
+
+#### Cualquier gráfico puede basarse en la combinación de:
+
+- **Data:** data frame con los datos a graficar
+- **Mapeo estético:** se compone principalmente en definir las coordenadas x – y
+- **Geometria:** El tipo de gráfico que desea realizar
+
+&lt;img src="imagenes/gg.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+_______________
+
+
+```r
+fallecidos_fecha &lt;- data_fallecidos_clean %&gt;% 
+  count(fecha, name = 'fallecidos')
+```
+
+
+
+```r
+ggplot(data=fallecidos_fecha)+
+  geom_col(mapping = aes(x= fecha, y= fallecidos))
+```
+
+]
+
+.pull-right[
+
+&lt;img src="ggplot2_CDC_files/figure-html/plot-label-out-1.svg" width="100%" /&gt;
+
+]
+
+
+]
+
+.panel[.panel-name[P2: Capas complemetarias]
+
+.pull-left[
+
+- `labs()`
+- `theme_...()`
+
+______________
+
+
+```r
+fallecidos_fecha &lt;- data_fallecidos_clean %&gt;% 
+  count(fecha, name = 'fallecidos')
+```
+
+
+```r
+ggplot(data=fallecidos_fecha)+
+  geom_col(mapping = aes(x= fecha, y= fallecidos))+
+  labs(x = 'Fecha (días)',
+       y = 'N° de fallecidos',
+       title = 'Tendencia de fallecidos por COVID-19',
+       caption = 'Fuente: SUSALUD')+
+  theme_bw()
+```
+
+]
+
+.pull-right[
+
+&lt;img src="ggplot2_CDC_files/figure-html/plot-label2-out-1.svg" width="100%" /&gt;
+
+]
+
+]
+
+.panel[.panel-name[P3: Tipos de gráficos]
+
+**[Cheatsheet ggplot2](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf
+)**: click para mas info
+
+&lt;img src="https://static.docsity.com/documents_first_pages/2020/10/09/fbfc4df27eccd1f0f56dcbf27df5f666.png
+" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[P4: Estéticas]
+
+
+.pull-left[
+
+- `color`
+- `fill`
+- `size`
+- `shape`
+
+______________
+
+
+```r
+falle_fecha_sexo &lt;- data_fallecidos_clean %&gt;% 
+  count(fecha, sexo, name = 'fallecidos')
+```
+
+
+
+```r
+ggplot(data = falle_fecha_sexo) +
+  geom_col(mapping = aes(x= fecha,
+                         y = fallecidos,
+                         fill = sexo))+
+  labs(x = 'Criterio', y = 'N° de fallecidos',
+       title = 'Tendencia de fallecidos por sexo',
+       caption = 'Fuente: SUSALUD',
+       fill = 'Sexo')+
+  theme_classic()
+```
+
+]
+
+.pull-right[
+
+&lt;img src="ggplot2_CDC_files/figure-html/plot-label3-out-1.svg" width="100%" /&gt;
+
+]
+
+]
+
+
+.panel[.panel-name[P5: Escalas]
+
+
+.pull-left[
+
+- `scale_x_...` / `scale_ y_...`
+- `scale_fill_...`
+- `scale_color_...`
+- `scale_size_...`
+
+______________
+
+
+```r
+falle_fecha_sexo &lt;- data_fallecidos_clean %&gt;% 
+  count(fecha, sexo, name = 'fallecidos')
+```
+
+
+
+```r
+ggplot(data = falle_fecha_sexo) +
+  geom_col(mapping = aes(x= fecha,
+                         y = fallecidos,
+                         fill = sexo))+
+  labs(x = 'Criterio', y = 'N° de fallecidos',
+       title = 'Tendencia de fallecidos por sexo',
+       caption = 'Fuente: SUSALUD',
+       fill = 'Sexo')+
+  theme_classic()+
+  scale_y_continuous(breaks = seq(0, 1000, 100)) +
+  scale_x_date(date_breaks = '2 month', date_labels = '%y/%m')
+```
+
+]
+
+.pull-right[
+
+&lt;img src="ggplot2_CDC_files/figure-html/plot-label4-out-1.svg" width="100%" /&gt;
+
+]
+
+]
+
+.panel[.panel-name[Extra]
+
+.pull-left[
+
+
+```r
+data_fallecidos_clean %&gt;% 
+  count(fecha, clasificacion_def, name = 'fallecidos') %&gt;% 
+  ggplot() +
+  geom_tile(mapping = aes(x= fecha,
+                         y = clasificacion_def,
+                         fill = fallecidos), alpha = 1)+
+  labs(x = 'Fecha', y = 'Criterio de defuncion',
+       title = 'Mapa de calor de fallecidos por criterio',
+       caption = 'Fuente: SUSALUD')+
+  theme_classic()+
+  scale_x_date(date_breaks = '4 month', date_labels = '%y/%m')+
+  scale_fill_viridis_c()
+```
+
+]
+
+.pull-right[
+
+&lt;img src="ggplot2_CDC_files/figure-html/plot-label5-out-1.svg" width="100%" /&gt;
+
+]
+
+]
+
+]
+
+---
+class: inverse,  center, middle
+
+# `¡Gracias por su atención!`
+
+&lt;img src="http://wegamers.176.com/GameIM/SNS/Image/20402358211595235926405967" width="70%" /&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 170%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

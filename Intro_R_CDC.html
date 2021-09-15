@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Intro_R_CDC.utf8</title>
+    <meta charset="utf-8" />
+    <script src="Intro_R_CDC_files/header-attrs-2.7/header-attrs.js"></script>
+    <link href="Intro_R_CDC_files/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="Intro_R_CDC_files/panelset-0.2.6/panelset.js"></script>
+    <script src="Intro_R_CDC_files/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="Intro_R_CDC_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="Intro_R_CDC_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script src="Intro_R_CDC_files/mark.js-8.11.1/mark.min.js"></script>
+    <link href="Intro_R_CDC_files/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="Intro_R_CDC_files/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":true,"autoSearch":true}) })</script>
+    <link href="Intro_R_CDC_files/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <script src="Intro_R_CDC_files/kePrint-0.0.1/kePrint.js"></script>
+    <link href="Intro_R_CDC_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="default2.css" type="text/css" />
+    <link rel="stylesheet" href="rladie.css" type="text/css" />
+    <link rel="stylesheet" href="rladies-font.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+
+
+
+
+background-image: url(imagenes/INICIAL.png)
+background-size:100%
+---
+class: inverse, center, middle
+background-image: url(imagenes/fondo_good.png)
+background-size: cover
+# Introducción al análisis de datos con
+&lt;img src="https://r-periodismo2019.netlify.app/images/R.png" width="150px"/&gt;
+### JPierre Velásquez
+.large[CDC | 19-08-2021]
+
+&lt;style type="text/css"&gt;
+.pull-left {
+  float: left;
+  width: 47%;
+}
+.pull-right {
+  float: right;
+  width: 47%;
+}
+.pull-right ~ p {
+  clear: both;
+}
+&lt;/style&gt;
+
+---
+
+class: center, middle, animated fadeOutLeft
+layout: false
+
+
+# Objetivos
+
+&lt;/br&gt;
+
+### Explicar aspectos basicos de R y manipulación de datos
+
+--
+
+layout: false
+
+### Conocer las librerias mas útiles (para análisis generales)
+
+--
+
+layout: false
+
+### Conocer las principales funciones de la colección de librerias tidyverse
+
+--
+
+layout: false
+
+### Aplicar lo aprendido en una base de datos
+
+
+---
+class: inverse,  center, middle
+
+&lt;img src="https://thumbs.gfycat.com/GorgeousOrdinaryBooby-max-14mb.gif" width="50%" /&gt;
+
+
+---
+layout: false
+
+background-image: url(https://bookdown.org/oscar_teach/estadistica_aplicada_con_r/r-rstudio.png)
+background-position: 90% 7%
+background-size: 15%
+
+# Aspectos Básico
+
+.panelset[
+.panel[.panel-name[R y Rstudio]
+
+**[R](https://www.r-project.org/)**: Es el lenguaje de programación, es libre (gratis) y de código abierto. [la interfaz resulta dura para muchos] 
+
+**[Rstudio](https://www.rstudio.com/products/rstudio/download/)**: IDE de preferencia por la mayoria (una interfaz mucho mas agradable para programar)
+
+.pull-left[
+
+&lt;img src="imagenes/ide_r.png" width="80%" style="display: block; margin: auto 0 auto auto;" /&gt;
+
+**[Cheatssheet Rstudio](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf)**
+
+]
+
+.pull-right[
+
+`Consola:` Es aquí donde nuestro código es interpretado, **la consola de R es la interfaz entre R y nosotros**.
+
+`Script:` Aqui se crean las lineas de código que posteriormente se ejecutarán en la consola.
+
+`Enviroment:` Aqui se guardarán los objetos que vas a crear (vectores, listas, data frames, arrays y funciones).
+
+
+
+`Como funciona R?:`
+
+- Abrimos una sesión de R.
+- En la sesión vamos a importar o crear objetos (todo en R es un objeto: vectores, tablas, funciones, etc.).
+- Operamos aplicando funciones a los objetos y creando nuevos objetos.
+
+]
+
+
+]
+
+
+.panel[.panel-name[¿Por qué usar R?]
+
+
+
+&lt;img src="imagenes/nube.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[Tipos de datos]
+
+En R a un elemento o dato se le asigna una clase, entre las mas basicas tenemos:
+
+&lt;img src="imagenes/tipo_datos.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[Estructuras]
+
+**[R-base](http://github.com/rstudio/cheatsheets/raw/master/base-r.pdf)**
+
+&lt;img src="https://hackernoon.com/images/pq5fk3z4t.jpg" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[Librerias]
+
+**¿Que són?:** Una Libreria es una colección de funciones, datos y código R que se almacenan en una carpeta conforme a una estructura bien definida, fácilmente accesible para R.
+
+**¿Como instalar una librería?**
+
+`1) Si la librería esta en el CRAN`
+
+
+```r
+install.packages('tidyverse')
+```
+
+`2) Si la librería esta en el GitHub`
+
+
+```r
+remotes::install_github("avallecam/epitidy")
+```
+
+**Librerias con mayor uso (por mi)**
+
+&lt;img src="imagenes/librerias.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+]
+
+]
+
+---
+class: inverse, center, middle
+
+&lt;img src="https://psyteachr.github.io/msc-data-skills/images/memes/repro_reports.jpg" width="50%" /&gt;
+
+---
+
+layout: false
+
+background-image: url(https://bookdown.org/oscar_teach/estadistica_aplicada_con_r/r-rstudio.png)
+background-position: 90% 7%
+background-size: 15%
+
+# Manejo de datos
+
+.panelset[
+.panel[.panel-name[¿Qué es?]
+
+
+Los datos que puedes encontrar disponibles en internet, repositorios o bases de datos, raramente están en el **formato necesario** para su análisis y necesitarás manipularlos antes de usarlos. `¡Esto puede llevar más tiempo que el análisis mismo!`
+
+#### La mayoria de las acciones de manipulación se pueden realizar con el universo de paquetes del:
+
+
+&lt;img src="https://jhudatascience.org/images/tidyverse.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[Importar archivos]
+
+.pull-left[
+
+### Algunos de los formatos mas comunes con sus respecivas funciones:
+
+&lt;table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Formato de archivo &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Libreria &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Ejemplo &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; csv &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; - &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; read.csv() o read.csv2() &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; excel &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; readxl &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; read_excel() &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; txt &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; - &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; read.table() &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; dbf &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; foreign &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; read.dbf() &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Ejemplo
+
+
+```r
+base_covid &lt;- read.csv2('https://cloud.minsa.gob.pe/s/AC2adyLkHCKjmfm/download', encoding = 'UTF-8') 
+```
+
+]
+
+.pull-right[
+
+### Para ver el resumen de nuestra base de datos usamos str()
+
+
+```r
+str(base_covid) 
+```
+
+```
+## 'data.frame':	2161358 obs. of  10 variables:
+##  $ FECHA_CORTE    : int  20210912 20210912 20210912 20210912 20210912 20210912 20210912 20210912 20210912 20210912 ...
+##  $ DEPARTAMENTO   : chr  "LIMA" "ICA" "HUANUCO" "ANCASH" ...
+##  $ PROVINCIA      : chr  "LIMA" "PISCO" "HUANUCO" "SANTA" ...
+##  $ DISTRITO       : chr  "SAN MARTIN DE PORRES" "PISCO" "HUANUCO" "SANTA" ...
+##  $ METODODX       : chr  "PR" "PR" "PR" "AG" ...
+##  $ EDAD           : int  25 20 22 18 17 19 21 31 35 34 ...
+##  $ SEXO           : chr  "MASCULINO" "FEMENINO" "FEMENINO" "FEMENINO" ...
+##  $ FECHA_RESULTADO: int  20201217 20200822 20200729 20210630 20210404 20200708 20210727 20210130 20210206 20200611 ...
+##  $ UBIGEO         : chr  "150135.0" "110501.0" "100101.0" "21808.0" ...
+##  $ id_persona     : int  24662153 24662175 24662197 24662204 24662207 24662231 24662254 24662310 24662314 24662316 ...
+```
+
+]
+
+]
+
+.panel[.panel-name[Funciones básicas]
+
+
+.pull-left[
+
+**[dplyr](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)** clik para ir al cheatshhet
+
+&lt;img src="https://biostat2.uni.lu/lectures/img/06/vaudor_dplyr_schema.png" width="69%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+
+```r
+# select()
+df_2 &lt;- base_covid %&gt;% select(FECHA_CORTE, SEXO)
+```
+
+
+```r
+# filter()
+df_2 &lt;- base_covid %&gt;% filter(EDAD &gt; 18)
+```
+
+
+```r
+# arrange()
+df_2 &lt;- base_covid %&gt;% arrange(EDAD)
+```
+
+
+```r
+# mutate()
+df_2 &lt;- base_covid %&gt;% mutate(EDAD_REAL = EDAD + 10)
+```
+
+
+```r
+# summarise()
+df_2 &lt;- base_covid %&gt;% summarise(edad_promedio = mean(EDAD, na.rm=T))
+```
+
+
+```r
+# count()
+df_2 &lt;- base_covid %&gt;% count(EDAD)
+```
+
+]
+
+]
+
+.panel[.panel-name[Funciones intermedias 1]
+
+`group_by`: para agrupar en función de una variable   .
+
+&lt;img src="https://swcarpentry.github.io/r-novice-gapminder/fig/13-dplyr-fig3.png" width="42%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[Funciones intermedias 2]
+
+`gather()`: para pasar de columnas a filas (wide a long)
+
+`spread()`: para pasar de filas a columnas (long a wide)
+
+&lt;img src="imagenes/tidyr.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+]
+
+---
+class: inverse,  center, middle
+
+# `¡Gracias por su atención!`
+
+&lt;img src="http://wegamers.176.com/GameIM/SNS/Image/20402358211595235926405967" width="50%" /&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 170%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

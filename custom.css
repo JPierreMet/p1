@@ -1,0 +1,54 @@
+/* custom.css */
+.left-code {
+  color: #777;
+  width: 43%;
+  height: 92%;
+  float: left;
+}
+.right-plot {
+  width: 55%;
+  float: right;
+  padding-left: 1%;
+}
+.remark-slide-content > h1:first-of-type {
+  margin-top: 0px;
+}
+.remark-slide-content > h2:first-of-type {
+  margin-top: 0px;
+}
+.remark-slide-content {
+  padding-top: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 10px;
+}
+.remark-slide-number {
+  position: inherit;
+}
+.remark-slide-number .progress-bar-container {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  display: block;
+  left: 0;
+  right: 0;
+}
+.remark-slide-number .progress-bar {
+  height: 100%;
+  background-color: #FFA333;
+}
+.highlight {
+  background-color: #E3DDCA;
+}
+
+.my-one-page-font {
+  font-size: 40px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700');
+
+body { font-family: 'Lato', 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif; }
+h1, h2, h3 { font-family: 'Yanone Kaffeesatz'; }
+.remark-code, .remark-inline-code { font-family: 'Inconsolata', 'Lucida Console', Monaco, monospace; color: #FFA333}
